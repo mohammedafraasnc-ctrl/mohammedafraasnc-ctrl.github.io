@@ -253,7 +253,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 <main>
   <section class="hero" id="home" data-theme="dark">
     <div class="photo" id="photo" data-reveal>
-      <img src="assets/portrait.webp" alt="Mohammed Afraas sitting on a black chair, wearing a black zip sweater and white sneakers" width="1184" height="1328" fetchpriority="high">
+      <img src="assets/portrait.webp?v=2" onerror="if(!this.dataset.retry){this.dataset.retry=1;var i=this;setTimeout(function(){i.src='assets/portrait.webp?r='+Date.now()},800)}" alt="Mohammed Afraas sitting on a black chair, wearing a black zip sweater and white sneakers" width="1184" height="1328" fetchpriority="high">
     </div>
     <div class="meta">
       <span class="tagpill mono" data-reveal>Motion design <i></i> UI/UX motion <i></i> Video</span>
@@ -305,28 +305,28 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
           <div class="svc-row"><span class="n">[01]</span><h3>Motion graphics</h3></div>
           <div class="svc-visual">
             <div class="desc"><p>Titles, transitions, captions, kinetic typography and storytelling pieces for brands, websites and social campaigns.</p><div class="tags mono"><span>Kinetic type</span><span>Explainers</span><span>Showreels</span></div></div>
-            <div class="img"><img src="assets/work/05.webp" alt="Motion graphics project cover" loading="lazy"></div>
+            <div class="img"><img src="assets/work/05.webp?v=2" alt="Motion graphics project cover" loading="lazy"></div>
           </div>
         </div>
         <div class="svc">
           <div class="svc-row"><span class="n">[02]</span><h3>UI/UX motion</h3></div>
           <div class="svc-visual">
             <div class="desc"><p>Micro-interactions, transitions and animated product moments, delivered as Rive and Lottie files developers can drop straight into the app.</p><div class="tags mono"><span>Rive</span><span>Lottie JSON</span><span>Micro-interactions</span></div></div>
-            <div class="img"><img src="assets/work/09.webp" alt="Rive and Lottie animation project cover" loading="lazy"></div>
+            <div class="img"><img src="assets/work/09.webp?v=2" alt="Rive and Lottie animation project cover" loading="lazy"></div>
           </div>
         </div>
         <div class="svc">
           <div class="svc-row"><span class="n">[03]</span><h3>2D animation</h3></div>
           <div class="svc-visual">
             <div class="desc"><p>2D and character animation for apps, learning content and brand stories.</p><div class="tags mono"><span>Characters</span><span>Infographics</span><span>Product stories</span></div></div>
-            <div class="img"><img src="assets/work/10.webp" alt="2D animation project cover" loading="lazy"></div>
+            <div class="img"><img src="assets/work/10.webp?v=2" alt="2D animation project cover" loading="lazy"></div>
           </div>
         </div>
         <div class="svc">
           <div class="svc-row"><span class="n">[04]</span><h3>Video + videography</h3></div>
           <div class="svc-visual">
             <div class="desc"><p>Shooting and editing property showcases, promos, reels, shorts and long-form videos, with pacing, music and sound design that keep people watching.</p><div class="tags mono"><span>Shoots</span><span>Reels + shorts</span><span>Sound design</span></div></div>
-            <div class="img"><img src="assets/work/01.webp" alt="Videography and video editing project cover" loading="lazy"></div>
+            <div class="img"><img src="assets/work/01.webp?v=2" alt="Videography and video editing project cover" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -438,7 +438,7 @@ document.documentElement.classList.toggle("js", hasGsap && !reduced);
 // Build project cards and captions (works with or without GSAP)
 $("tot").textContent = pad(projects.length);
 $("orbitList").innerHTML = projects.map(p =>
-  `<a class="card" href="${p.url}" target="_blank" rel="noopener" aria-label="${p.t} on Behance">${p.video ? `<video src="${p.video}" muted loop playsinline poster="assets/work/${p.img}.webp"></video>` : `<img src="assets/work/${p.img}.webp" alt="" loading="lazy">`}</a>`
+  `<a class="card" href="${p.url}" target="_blank" rel="noopener" aria-label="${p.t} on Behance">${p.video ? `<video src="${p.video}" muted loop playsinline poster="assets/work/${p.img}.webp?v=2"></video>` : `<img src="assets/work/${p.img}.webp?v=2" alt="" loading="lazy">`}</a>`
 ).join("");
 $("workContent").innerHTML = projects.map(p =>
   `<div class="item"><h3 class="ln">${p.t}</h3><p class="ln">${p.k}</p><p class="ln"><a href="${p.url}" target="_blank" rel="noopener">View on Behance ↗</a></p></div>`
