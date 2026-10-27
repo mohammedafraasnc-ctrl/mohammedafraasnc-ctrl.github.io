@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Afraas NC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mohammed Afraas NC: motion designer, UI/UX motion, 2D animator, video editor and videographer based in Dubai.">
+<meta property="og:title" content="Mohammed Afraas NC: Motion designer">
+<meta property="og:description" content="Motion graphics, UI/UX motion, 2D animation and video. Based in Dubai.">
+<meta property="og:image" content="https://mohammedafraasnc-ctrl.github.io/assets/portrait.webp">
+<meta property="og:url" content="https://mohammedafraasnc-ctrl.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232D3B8E'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='34' font-weight='700' text-anchor='middle' fill='%23E9ECFA'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the giant bracketed name shrinks into the nav logo as the hero scrolls away; about; a cobalt stroke wipes the screen into pinned stacking services; an orbiting project carousel; experience; a dark contact scene with words flying past; a cobalt footer revealed from underneath. Single light theme by choice. */
+:root {
+  --paper: #E3E3E1;
+  --paper-2: #D3D3D0;
+  --ink: #0D0E14;
+  --ink-2: #55565C;
+  --cobalt: #2D3B8E;
+  --cobalt-ink: #E9ECFA;
+  --cobalt-soft: #A3ADE0;
+  --line: rgba(13, 14, 20, .16);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gl: max(clamp(16px, 2.2vw, 32px), env(safe-area-inset-left, 0px));
+  --gr: max(clamp(16px, 2.2vw, 32px), env(safe-area-inset-right, 0px));
+  --nav-fg: var(--ink);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--display); font-variation-settings: "wdth" 100; font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+.wrap { padding-left: var(--gl); padding-right: var(--gr); }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.heavy { font-weight: 800; font-variation-settings: "wdth" 112; text-transform: uppercase; letter-spacing: -.02em; line-height: .92; margin: 0; }
+
+/* Bracket headings: the brackets slide in from the sides on scroll */
+.bh { display: inline-flex; align-items: center; gap: .35em; font-weight: 600; font-variation-settings: "wdth" 104; font-size: clamp(30px, 4.4vw, 64px); color: var(--cobalt); line-height: 1; margin: 0; }
+.bh .b { font-weight: 300; display: inline-block; }
+
+/* Pills with rolling text */
+.pill {
+  --bg: var(--ink); --fg: var(--paper);
+  display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--bg); color: var(--fg); text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+  transition: background .3s, color .3s;
+}
+.pill.blue { --bg: var(--cobalt); --fg: var(--cobalt-ink); }
+.pill.light { --bg: var(--cobalt-ink); --fg: var(--ink); }
+.pill.lg { height: 42px; padding: 0 20px; font-size: 12px; }
+.roll { display: grid; height: 1.3em; line-height: 1.3em; overflow: hidden; }
+.roll span { grid-area: 1 / 1; transition: transform .55s cubic-bezier(.625,.05,0,1); }
+.roll span + span { transform: translateY(110%); }
+.pill:hover .roll span:first-child, .pill:focus-visible .roll span:first-child { transform: translateY(-110%); }
+.pill:hover .roll span + span, .pill:focus-visible .roll span + span { transform: none; }
+
+/* Nav: the logo is the hero name, scaled down by scroll */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--paper); }
+.nav { --nav-bg: var(--paper); position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 50; pointer-events: none; padding-block: 14px; display: flex; justify-content: flex-end; transition: background-color .35s; }
+.nav.solid { background: var(--nav-bg); }
+.nav .actions { display: flex; gap: 6px; pointer-events: auto; }
+.nav[data-nav="light"] { --nav-fg: var(--cobalt-ink); }
+.nav[data-nav="light"] .pill:not(.blue) { --bg: var(--cobalt-ink); --fg: var(--ink); }
+.nav[data-nav="light"] .pill.blue { box-shadow: inset 0 0 0 1px var(--cobalt-ink); }
+.logo { position: absolute; left: var(--gl); top: 14px; width: calc(100vw - var(--gl) - var(--gr)); pointer-events: auto; transform-origin: 0 0; display: block; line-height: 0; }
+.logo svg { width: 100%; height: auto; display: block; overflow: visible; }
+.logo text { fill: var(--nav-fg); font-family: var(--display); font-weight: 300; font-variation-settings: "wdth" 118; font-size: 100px; letter-spacing: -2px; transition: fill .3s; }
+
+/* Intro wipe */
+.loader { position: fixed; inset: 0; z-index: 100; pointer-events: none; display: none; }
+.js .loader { display: block; }
+.loader svg, .draw-overlay svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.loader path, .draw-overlay path { fill: none; stroke: var(--cobalt); stroke-linecap: round; }
+.loader path { stroke-width: 160%; }
+.draw-overlay { display: none; }
+.js .draw-overlay { display: block; }
+.loader .tag { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--cobalt-ink); text-align: center; white-space: nowrap; font-size: clamp(14px, 1.6vw, 22px); letter-spacing: .12em; }
+
+/* Hero */
+.hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+.hero .photo { position: absolute; left: 0; right: 0; margin-inline: auto; bottom: 0; height: min(76svh, 110vw); aspect-ratio: 1184 / 1328; max-width: 100%; mix-blend-mode: multiply; -webkit-mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 18%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 18%); mask-composite: intersect; }
+.hero .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(1) contrast(1.1); }
+.hero .meta { position: absolute; left: var(--gl); right: var(--gr); bottom: 18px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.tagpill { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; background: var(--paper); }
+.tagpill i { width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.where { text-align: right; display: flex; gap: 10px; align-items: center; }
+.globe { width: 22px; height: 22px; border: 1.5px solid var(--ink); border-radius: 50%; position: relative; overflow: hidden; }
+.globe::before { content: ""; position: absolute; inset: 0 5px; border: 1.5px solid var(--ink); border-radius: 50%; }
+.globe::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1.5px solid var(--ink); }
+
+/* Intro + about */
+.intro { padding-block: clamp(48px, 7vw, 96px) 0; display: flex; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; }
+.intro h2 { font-size: clamp(44px, 8vw, 128px); }
+.intro p { margin: 0 0 .4em; max-width: 30ch; font-size: 14px; }
+.about { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; padding-block: clamp(80px, 12vw, 180px) clamp(64px, 9vw, 140px); }
+.about .col { grid-column: 7 / -1; display: grid; gap: 22px; justify-items: start; }
+.about p { margin: 0; max-width: 56ch; font-size: clamp(15px, 1.15vw, 17px); }
+.avail { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-2); }
+.avail i { width: 7px; height: 7px; border-radius: 50%; background: #2E9E5B; box-shadow: 0 0 0 4px rgba(46,158,91,.18); }
+.stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); padding-top: 24px; margin-top: clamp(32px, 6vw, 80px); }
+.stat b { display: block; font-weight: 200; font-variation-settings: "wdth" 120; font-size: clamp(44px, 6vw, 96px); line-height: 1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--ink-2); }
+
+/* Stroke wipe into services */
+.draw { position: relative; z-index: 3; height: 100svh; overflow: hidden; background: var(--paper); }
+.draw .inner { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: clamp(20px, 3vw, 40px); }
+.draw h2 { font-size: clamp(44px, 9vw, 150px); }
+.draw h2 .char { display: inline-block; will-change: transform; }
+.draw-overlay { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+
+/* Services */
+.services { background: var(--cobalt); color: var(--cobalt-ink); position: relative; z-index: 1; }
+@media (min-width: 992px) { .js .services { margin-top: -100svh; } }
+.draw-end { display: none; position: absolute; inset: 0; z-index: 3; place-content: center; justify-items: center; gap: 16px; text-align: center; color: var(--cobalt-ink); }
+.draw-end p { margin: 0; max-width: 30ch; color: var(--cobalt-soft); font-size: 14px; }
+.draw-end .bh { color: var(--cobalt-ink); }
+.services .top { padding-top: 84px; padding-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.services .top p { margin: 0; max-width: 36ch; color: var(--cobalt-soft); font-size: 14px; }
+.services .bh { color: var(--cobalt-ink); }
+.svc-viewport { overflow: hidden; }
+.svc-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid rgba(233,236,250,.3); padding-block: 14px; }
+.svc-row .n { font-weight: 300; font-variation-settings: "wdth" 116; font-size: clamp(28px, 3vw, 44px); line-height: 1; }
+.svc-row h3 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 112; text-transform: uppercase; font-size: clamp(22px, 2.6vw, 40px); letter-spacing: -.01em; line-height: 1; text-align: right; }
+.svc-visual { display: grid; grid-template-columns: 29fr 71fr; overflow: hidden; }
+.svc-visual .desc { padding: 22px 24px 22px 0; display: grid; align-content: end; gap: 14px; font-size: 14px; color: var(--cobalt-soft); }
+.svc-visual .desc p { margin: 0; max-width: 34ch; }
+.svc-visual .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.svc-visual .tags span { border: 1px solid rgba(233,236,250,.35); border-radius: 999px; padding: 2px 10px; color: var(--cobalt-ink); }
+.svc-visual .img { position: relative; overflow: hidden; background: var(--cobalt-ink); min-height: 220px; }
+.svc-visual .img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.svc-visual .img img.crop { left: -16%; width: 132%; max-width: none; }
+
+/* Portfolio orbit */
+.work { padding-block: clamp(100px, 13vw, 180px) clamp(64px, 8vw, 120px); position: relative; }
+.work h2 { font-size: clamp(30px, 5vw, 80px); text-align: center; max-width: 18ch; margin-inline: auto; }
+.work h2 .char { display: inline-block; }
+.work { overflow-x: clip; }
+.orbit { --cw: clamp(230px, 36vw, 540px); position: relative; margin-top: clamp(24px, 4vw, 56px); display: grid; gap: clamp(16px, 2.5vw, 32px); }
+.stage { position: relative; height: calc(var(--cw) * .7821 + 48px); perspective: 1600px; touch-action: pan-y; cursor: grab; user-select: none; }
+.stage.dragging { cursor: grabbing; }
+.orbit-list { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.card { position: absolute; left: 0; top: 0; width: var(--cw); aspect-ratio: 808 / 632; margin: calc(var(--cw) * -.3911) 0 0 calc(var(--cw) * -.5); display: block; border-radius: 14px; overflow: hidden; background: var(--paper-2); text-decoration: none; will-change: transform; box-shadow: 0 40px 70px -40px rgba(13, 14, 20, .55); -webkit-user-drag: none; }
+.card img, .card video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: scale .6s cubic-bezier(.625,.05,0,1); }
+.card.active:hover img, .card.active:hover video { scale: 1.04; }
+.count { font-weight: 300; font-variation-settings: "wdth" 116; font-size: clamp(36px, 4.2vw, 64px); line-height: 1; display: flex; gap: .2em; overflow: hidden; font-variant-numeric: tabular-nums; }
+.count #cur { display: inline-block; }
+.work-content { position: relative; min-height: 112px; flex: 1; }
+.work-content .item { position: absolute; left: 0; bottom: 0; width: min(44ch, 100%); display: grid; gap: 6px; visibility: hidden; }
+.work-content .item.on { visibility: visible; }
+.work-content h3 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 110; font-size: clamp(18px, 1.7vw, 24px); text-transform: uppercase; line-height: 1.05; }
+.work-content p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.work-content a { color: var(--cobalt); white-space: nowrap; }
+.arrows { display: flex; gap: 10px; flex: none; }
+.arrow { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; cursor: pointer; font-size: 18px; color: var(--ink); transition: background .25s, color .25s; }
+.arrow:hover { background: var(--ink); color: var(--paper); }
+.arrow:focus-visible { outline-offset: 4px; }
+.work-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+
+/* Experience */
+.exp { padding-block: clamp(48px, 8vw, 120px); display: grid; gap: clamp(32px, 5vw, 56px); }
+.exp-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.exp-head p { margin: 0; color: var(--ink-2); max-width: 38ch; }
+.job { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.3fr) minmax(0, 1.6fr); gap: 24px; padding-block: 26px; border-top: 1px solid var(--line); align-items: baseline; }
+.job:last-child { border-bottom: 1px solid var(--line); }
+.job .when { color: var(--ink-2); display: grid; gap: 4px; }
+.job .when .now { color: var(--cobalt); }
+.job h3 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 110; font-size: clamp(18px, 1.8vw, 26px); line-height: 1.08; text-transform: uppercase; }
+.job .co { color: var(--cobalt); margin-top: 6px; display: block; }
+.job ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); display: grid; gap: 6px; font-size: 15px; }
+.job a { color: var(--cobalt); }
+
+/* Contact scene */
+.contact { position: relative; height: 260svh; background: var(--ink); color: var(--cobalt-ink); }
+.contact .stick { position: sticky; top: 0; height: 100svh; overflow: hidden; perspective: 1000px; display: grid; place-items: center; }
+.words { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+.words span { position: absolute; left: 50%; top: 50%; font-weight: 400; font-variation-settings: "wdth" 110; font-size: clamp(22px, 3vw, 44px); color: rgba(233,236,250,.55); white-space: nowrap; }
+.contact-content { position: relative; z-index: 2; text-align: center; display: grid; gap: 18px; justify-items: center; }
+.contact-content h2 { font-size: clamp(64px, 14vw, 230px); font-variation-settings: "wdth" 104; letter-spacing: -.03em; }
+.contact-content p { margin: 0; max-width: 40ch; color: var(--cobalt-soft); font-size: 14px; }
+.contact-content .ctas { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.mailrow { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(233,236,250,.3); border-radius: 999px; padding: 0 5px 0 16px; height: 42px; font-family: var(--mono); font-size: 12px; }
+.mailrow button { background: transparent; color: var(--cobalt-ink); border: 1px solid rgba(233,236,250,.3); border-radius: 999px; height: 32px; padding: 0 12px; cursor: pointer; font: 11px var(--mono); text-transform: uppercase; }
+
+/* Footer */
+.footer { background: var(--cobalt); color: var(--cobalt-ink); overflow: hidden; }
+.footer-inner { position: relative; padding-block: clamp(72px, 9vw, 120px) 18px; }
+.f-cols { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 0 clamp(28px, 4vw, 64px); }
+.f-cols::before, .f-cols::after { content: ""; position: absolute; top: -16px; bottom: -16px; width: 14px; border: 3px solid var(--cobalt-ink); }
+.f-cols::before { left: 0; border-right: 0; }
+.f-cols::after { right: 0; border-left: 0; }
+.f-cols h4 { margin: 0 0 14px; font-weight: 600; font-size: clamp(16px, 1.4vw, 20px); }
+.f-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 13px; font-weight: 600; }
+.f-cols a { text-decoration: none; }
+.f-cols a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.giant { margin: clamp(48px, 7vw, 100px) 0 0; font-weight: 200; font-variation-settings: "wdth" 120; font-size: 14.2vw; line-height: .85; letter-spacing: -.04em; color: rgba(233,236,250,.16); white-space: nowrap; }
+.legal { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 18px; color: rgba(233,236,250,.75); font-size: 11px; }
+
+@media (max-width: 991px) {
+  .about .col { grid-column: 1 / -1; }
+  .svc-visual { grid-template-columns: minmax(0, 1fr); }
+  .svc-visual .desc { padding-right: 0; }
+  .svc-visual .img { aspect-ratio: 16 / 10; }
+  .js .draw-end { display: grid; }
+  .js .services .top { display: none; }
+  .js .services { padding-top: 8px; }
+  .job { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+}
+@media (max-width: 640px) {
+  .hero .photo { height: 62svh; bottom: 64px; }
+  .where { text-align: left; }
+  .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .f-cols { grid-template-columns: minmax(0, 1fr); }
+  .orbit { --cw: min(68vw, 300px); }
+  .work-bottom { flex-direction: column; align-items: stretch; }
+  .work-content { min-height: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roll span { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M -30 20 C 10 -20, 30 70, 55 45 S 95 10, 130 80"/></svg>
+  <div class="tag mono">Afraas NC · Motion designer</div>
+</div>
+
+<header class="nav wrap" id="nav" data-nav="dark">
+  <a class="logo" id="logo" href="#home" aria-label="Afraas NC, back to top">
+    <svg id="logoSvg" viewBox="0 -78 640 98" aria-hidden="true"><text id="logoText" x="0" y="0">AFRAAS [NC]</text></svg>
+  </a>
+  <div class="actions">
+    <a class="pill" href="#contact"><span class="roll"><span>Hire me</span><span>Hire me</span></span></a>
+    <a class="pill blue" href="#work"><span class="roll"><span>View work</span><span>View work</span></span></a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home" data-theme="dark">
+    <div class="photo" id="photo" data-reveal>
+      <img src="assets/portrait.webp" alt="Mohammed Afraas sitting on a black chair, wearing a black zip sweater and white sneakers" width="1184" height="1328" fetchpriority="high">
+    </div>
+    <div class="meta">
+      <span class="tagpill mono" data-reveal>Motion design <i></i> UI/UX motion <i></i> Video</span>
+      <div class="where mono" data-reveal><div>Dubai, UAE<br>Working globally</div><span class="globe"></span></div>
+    </div>
+  </section>
+
+  <section class="intro wrap" data-theme="dark">
+    <h2 class="heavy" data-split-lines>Motion<br>designer</h2>
+    <p data-split-lines>Motion graphics, app animation and video that help brands and products tell their story.</p>
+  </section>
+
+  <section class="about wrap" id="about" data-theme="dark">
+    <div class="col">
+      <h2 class="bh" data-bracket><span class="b" data-l>[</span>About<span class="b" data-r>]</span></h2>
+      <p data-split-lines>I'm Mohammed Afraas, a motion designer, video editor, 2D animator and videographer based in Dubai, with 4+ years of experience in motion, animation and storytelling-driven edits.</p>
+      <p data-split-lines>I designed UI/UX motion, micro-interactions and Rive and Lottie animations for the Wizdom learning app and worked with its developers to ship them. Today I shoot and edit property and brand videos for a real estate company in Dubai.</p>
+      <div class="avail mono"><i></i>Available for freelance and full-time</div>
+      <a class="pill blue lg" href="#contact"><span class="roll"><span>Start a project</span><span>Start a project</span></span></a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>4+</b><span class="mono">Years in motion and video</span></div>
+      <div class="stat"><b>100K+</b><span class="mono">Downloads on Wizdom, the app I animated</span></div>
+      <div class="stat"><b>3</b><span class="mono">Languages: English, Hindi, Malayalam</span></div>
+    </div>
+  </section>
+
+  <section class="draw" id="draw" data-theme="dark">
+    <div class="inner wrap">
+      <h2 class="heavy" id="randomHead">Small details.<br>Big motion.</h2>
+    </div>
+    <div class="draw-overlay" id="drawOverlay" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M -30 85 C 10 120, 25 10, 55 40 S 90 100, 130 5"/></svg>
+    </div>
+    <div class="draw-end wrap" id="drawEnd" aria-hidden="true">
+      <h2 class="bh"><span class="b">[</span>Services<span class="b">]</span></h2>
+      <p>From the shoot to the final frame, and from a static screen to an interface that moves.</p>
+    </div>
+  </section>
+
+  <section class="services" id="services" data-theme="light">
+    <div class="top wrap">
+      <h2 class="bh" data-bracket><span class="b" data-l>[</span>Services<span class="b" data-r>]</span></h2>
+      <p>From the shoot to the final frame, and from a static screen to an interface that moves.</p>
+    </div>
+    <div class="svc-viewport wrap" id="svcViewport">
+      <div id="svcList">
+        <div class="svc">
+          <div class="svc-row"><span class="n">[01]</span><h3>Motion graphics</h3></div>
+          <div class="svc-visual">
+            <div class="desc"><p>Titles, transitions, captions, kinetic typography and storytelling pieces for brands, websites and social campaigns.</p><div class="tags mono"><span>Kinetic type</span><span>Explainers</span><span>Showreels</span></div></div>
+            <div class="img"><img src="assets/work/05.webp" alt="Motion graphics project cover" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="svc">
+          <div class="svc-row"><span class="n">[02]</span><h3>UI/UX motion</h3></div>
+          <div class="svc-visual">
+            <div class="desc"><p>Micro-interactions, transitions and animated product moments, delivered as Rive and Lottie files developers can drop straight into the app.</p><div class="tags mono"><span>Rive</span><span>Lottie JSON</span><span>Micro-interactions</span></div></div>
+            <div class="img"><img src="assets/work/09.webp" alt="Rive and Lottie animation project cover" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="svc">
+          <div class="svc-row"><span class="n">[03]</span><h3>2D animation</h3></div>
+          <div class="svc-visual">
+            <div class="desc"><p>2D and character animation for apps, learning content and brand stories.</p><div class="tags mono"><span>Characters</span><span>Infographics</span><span>Product stories</span></div></div>
+            <div class="img"><img src="assets/work/10.webp" alt="2D animation project cover" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="svc">
+          <div class="svc-row"><span class="n">[04]</span><h3>Video + videography</h3></div>
+          <div class="svc-visual">
+            <div class="desc"><p>Shooting and editing property showcases, promos, reels, shorts and long-form videos, with pacing, music and sound design that keep people watching.</p><div class="tags mono"><span>Shoots</span><span>Reels + shorts</span><span>Sound design</span></div></div>
+            <div class="img"><img src="assets/work/01.webp" alt="Videography and video editing project cover" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work wrap" id="work" data-theme="dark">
+    <div style="text-align:center; margin-bottom: 18px;"><h2 class="bh" data-bracket><span class="b" data-l>[</span>Projects<span class="b" data-r>]</span></h2></div>
+    <h2 class="heavy" id="rollHead">Ideas turned into motion that moves people.</h2>
+    <div class="orbit" id="orbit">
+      <div class="count" aria-live="polite"><span id="cur">01</span><span>/</span><span id="tot">12</span></div>
+      <div class="stage" id="stage"><div class="orbit-list" id="orbitList"></div></div>
+      <div class="work-bottom">
+        <div class="work-content" id="workContent"></div>
+        <div class="arrows">
+          <button class="arrow" id="prev" type="button" aria-label="Previous project">←</button>
+          <button class="arrow" id="next" type="button" aria-label="Next project">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="exp wrap" id="experience" data-theme="dark">
+    <div class="exp-head">
+      <h2 class="bh" data-bracket><span class="b" data-l>[</span>Experience<span class="b" data-r>]</span></h2>
+      <p data-split-lines>Four years across real estate, a learning app, a creative agency and creator channels.</p>
+    </div>
+    <div>
+      <div class="job">
+        <div class="when mono"><span class="now">Present</span><span>1.5 years · Full-time</span></div>
+        <div><h3>Video editor, motion designer + videographer</h3><span class="co mono">BFG Properties / Advisory · Dubai</span></div>
+        <ul><li>Plan, shoot and edit property showcases, promos and social videos for a UAE real estate company.</li><li>Add motion graphics, titles, captions, music and sound design that match each marketing goal.</li></ul>
+      </div>
+      <div class="job">
+        <div class="when mono"><span>1.5 years</span></div>
+        <div><h3>Motion designer</h3><span class="co mono">Wizdom App · 100K+ downloads</span></div>
+        <ul><li>Created 2D animations, Lottie JSON assets and Rive interactive motion for the Wizdom mobile app.</li><li>Designed UI/UX motion, micro-interactions and transitions, and worked with developers to ship them. <a href="https://play.google.com/store/apps/details?id=com.learn.wizdom" target="_blank" rel="noopener">See the app ↗</a></li></ul>
+      </div>
+      <div class="job">
+        <div class="when mono"><span>6+ months</span></div>
+        <div><h3>Motion designer</h3><span class="co mono">Haris&amp;Co.</span></div>
+        <ul><li>Made motion graphics, typography animation, transitions and effects for digital and promotional content.</li></ul>
+      </div>
+      <div class="job">
+        <div class="when mono"><span>2+ years</span></div>
+        <div><h3>Video editor</h3><span class="co mono">YouTube + Instagram creators</span></div>
+        <ul><li>Edited reels, shorts and long-form videos with motion graphics, subtitles and cinematic pacing.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" data-theme="light">
+    <div class="stick">
+      <div class="words" id="words" aria-hidden="true"></div>
+      <div class="contact-content wrap" id="contactContent">
+        <h2 class="heavy">Contact</h2>
+        <p>Have a project in mind? Tell me what you need and I'll get back to you soon.</p>
+        <div class="ctas">
+          <a class="pill light lg" href="https://www.behance.net/mohammedafraas" target="_blank" rel="noopener"><span class="roll"><span>Hire me on Behance ↗</span><span>Hire me on Behance ↗</span></span></a>
+          <span class="mailrow"><span id="mail">mohammedafraasnc@gmail.com</span><button id="copy" type="button">Copy</button></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="footer" data-theme="light">
+  <div class="footer-inner wrap" id="footerInner">
+    <div class="f-cols">
+      <div><h4>[ Socials ]</h4><ul><li><a href="https://www.behance.net/mohammedafraas" target="_blank" rel="noopener">Behance</a></li><li><a href="https://www.youtube.com/@theafrasme" target="_blank" rel="noopener">YouTube @theafrasme</a></li><li><a href="https://www.youtube.com/@xxahid" target="_blank" rel="noopener">YouTube @xxahid</a></li></ul></div>
+      <div><h4>[ Nav ]</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#work">Projects</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>[ Contact ]</h4><ul><li>mohammedafraasnc@gmail.com</li><li>Dubai, UAE</li><li>Freelance + full-time</li></ul></div>
+    </div>
+    <p class="giant" aria-hidden="true">AFRAAS NC.</p>
+    <div class="legal mono"><span>Small details, big motion</span><span>© <span id="yr">2026</span> Mohammed Afraas NC</span></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+// Add `video: "assets/work/xx.mp4"` to any project to play a looping clip on its card.
+const projects = [
+  { t: "Videography + video editing", k: "Video", img: "01", url: "https://www.behance.net/gallery/255803449/VIDEOGRAPHVIDEOEDITING" },
+  { t: "SEO motion graphics", k: "Motion graphics", img: "02", url: "https://www.behance.net/gallery/248926191/SEO-Motion-graphics" },
+  { t: "Website showreel", k: "Motion graphics", img: "03", url: "https://www.behance.net/gallery/248790111/Motion-graphics-web-site-show-reel" },
+  { t: "Motion design for websites", k: "Motion design", img: "04", url: "https://www.behance.net/gallery/248789517/Motion-design-shows-web-sites" },
+  { t: "Motion graphics", k: "Motion graphics", img: "05", url: "https://www.behance.net/gallery/248788883/Motion-graphics" },
+  { t: "Motion reel sizes", k: "Motion reel", img: "06", url: "https://www.behance.net/gallery/248790301/Motion-reel-size" },
+  { t: "Motion reel", k: "Motion reel", img: "07", url: "https://www.behance.net/gallery/248790629/Motion-reel" },
+  { t: "Storytelling motion graphics", k: "Storytelling", img: "08", url: "https://www.behance.net/gallery/242158133/Story-Telling-Motion-Graphics" },
+  { t: "Rive + Lottie animations", k: "Interactive animation", img: "09", url: "https://www.behance.net/gallery/240231675/RIVELOTTIE-ANIMATIONS" },
+  { t: "2D animation", k: "Animation", img: "10", url: "https://www.behance.net/gallery/240290795/2D-Animation" },
+  { t: "Infographics", k: "Infographics", img: "11", url: "https://www.behance.net/gallery/240291059/Infographics" },
+  { t: "Short-form motion graphics", k: "Short form", img: "12", url: "https://www.behance.net/gallery/240291731/Short-Form-Motion-Graphics" }
+];
+const contactWords = ["CONTACT", "CONTACTO", "تواصل", "संपर्क", "ബന്ധപ്പെടുക", "CONTACTEZ", "KONTAKT", "連絡", "연락", "CONTATTO"];
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, "0");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hasGsap = !!window.gsap;
+document.documentElement.classList.toggle("js", hasGsap && !reduced);
+
+// Build project cards and captions (works with or without GSAP)
+$("tot").textContent = pad(projects.length);
+$("orbitList").innerHTML = projects.map(p =>
+  `<a class="card" href="${p.url}" target="_blank" rel="noopener" aria-label="${p.t} on Behance">${p.video ? `<video src="${p.video}" muted loop playsinline poster="assets/work/${p.img}.webp"></video>` : `<img src="assets/work/${p.img}.webp" alt="" loading="lazy">`}</a>`
+).join("");
+$("workContent").innerHTML = projects.map(p =>
+  `<div class="item"><h3 class="ln">${p.t}</h3><p class="ln">${p.k}</p><p class="ln"><a href="${p.url}" target="_blank" rel="noopener">View on Behance ↗</a></p></div>`
+).join("");
+
+$("copy").onclick = async () => {
+  const text = $("mail").textContent;
+  try { await navigator.clipboard.writeText(text); $("copy").textContent = "Copied"; }
+  catch { const r = document.createRange(); r.selectNodeContents($("mail")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("copy").textContent = "Selected"; }
+  setTimeout(() => $("copy").textContent = "Copy", 1600);
+};
+$("yr").textContent = new Date().getFullYear();
+
+// Fit the logo's viewBox to the real text once fonts load
+function fitLogo() {
+  try {
+    const b = $("logoText").getBBox();
+    if (b.width) $("logoSvg").setAttribute("viewBox", `${b.x} ${b.y + b.height * .14} ${b.width} ${b.height * .78}`);
+  } catch (e) {}
+}
+
+if (!hasGsap || reduced) {
+  // Static fallback: every section readable, simple carousel
+  fitLogo();
+  document.fonts?.ready.then(fitLogo);
+  $("logo").style.width = "190px";
+  const items = [...document.querySelectorAll("#workContent .item")];
+  const cards = [...document.querySelectorAll(".card")];
+  let cur = 0;
+  const show = i => {
+    cur = (i + projects.length) % projects.length;
+    $("cur").textContent = pad(cur + 1);
+    items.forEach((el, j) => el.classList.toggle("on", j === cur));
+    cards.forEach((c, j) => { c.style.display = j === cur ? "block" : "none"; c.style.width = "min(420px, 80vw)"; });
+  };
+  $("prev").onclick = () => show(cur - 1);
+  $("next").onclick = () => show(cur + 1);
+  show(0);
+} else {
+  gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, CustomEase);
+  CustomEase.create("osmo", "0.625, 0.05, 0, 1");
+  gsap.defaults({ ease: "osmo", duration: .6 });
+  history.scrollRestoration = "manual";
+
+  const lenis = new Lenis({ lerp: .165, wheelMultiplier: 1.25 });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  lenis.stop();
+
+  // Smooth anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+    const id = a.getAttribute("href");
+    const target = id === "#home" ? 0 : document.querySelector(id);
+    if (target === null) return;
+    e.preventDefault();
+    lenis.scrollTo(target, { duration: 1.2, easing: t => t < .5 ? 8 * t ** 4 : 1 - Math.pow(-2 * t + 2, 4) / 2 });
+  }));
+
+  // Nav colour follows the section under it
+  const nav = $("nav");
+  const themed = [...document.querySelectorAll("[data-theme]")];
+  const bgFor = s => {
+    if (s.id === "draw") return s.dataset.theme === "light" ? "var(--cobalt)" : "var(--paper)";
+    const c = getComputedStyle(s).backgroundColor;
+    return c === "rgba(0, 0, 0, 0)" || c === "transparent" ? "var(--paper)" : c;
+  };
+  const checkTheme = () => {
+    const y = 30;
+    for (const s of themed) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= y && r.bottom >= y) { nav.dataset.nav = s.dataset.theme; nav.style.setProperty("--nav-bg", bgFor(s)); break; }
+    }
+    nav.classList.toggle("solid", document.querySelector(".hero").getBoundingClientRect().bottom < 90);
+  };
+  lenis.on("scroll", checkTheme);
+
+  document.fonts.ready.then(() => {
+    fitLogo();
+    initLogo();
+    initIntro();
+    initParallax();
+    initBrackets();
+    initSplitLines();
+    initDraw();
+    initServices();
+    initOrbit();
+    initContact();
+    initFooter();
+    checkTheme();
+    ScrollTrigger.refresh();
+  });
+
+  // Page-load wipe: a thick cobalt stroke covers the screen, then draws itself away
+  function initIntro() {
+    const path = $("loader").querySelector("path");
+    const tag = $("loader").querySelector(".tag");
+    const reveal = document.querySelectorAll("[data-reveal]");
+    gsap.set(path, { drawSVG: "0% 100%", strokeWidth: "160%" });
+    gsap.set(reveal, { yPercent: 25, autoAlpha: 0 });
+    gsap.set(tag, { autoAlpha: 0, y: 10 });
+    gsap.timeline()
+      .to(tag, { autoAlpha: 1, y: 0, duration: .6 })
+      .to(tag, { autoAlpha: 0, duration: .3 }, "+=.5")
+      .to(path, { drawSVG: "100% 100%", strokeWidth: "5%", duration: 1.25, ease: "power1.inOut" }, "<")
+      .fromTo("#logo", { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1, ease: "expo.out" }, "<.45")
+      .to(reveal, { yPercent: 0, autoAlpha: 1, duration: 1, stagger: .15, ease: "expo.out" }, "<.1")
+      .add(() => { $("loader").style.display = "none"; lenis.start(); });
+  }
+
+  // Hero name shrinks into the nav logo while the hero scrolls away
+  function initLogo() {
+    const logo = $("logo");
+    const fullW = () => innerWidth - parseFloat(getComputedStyle(nav).paddingLeft) - parseFloat(getComputedStyle(nav).paddingRight);
+    const smallW = () => Math.min(190, innerWidth * .38);
+    const startY = () => innerWidth < 768 ? 64 : 58;
+    gsap.fromTo(logo, { width: fullW, y: startY }, {
+      width: smallW, y: 0, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1, invalidateOnRefresh: true }
+    });
+  }
+
+  function initParallax() {
+    gsap.to("#photo img", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  }
+
+  function initBrackets() {
+    document.querySelectorAll("[data-bracket]").forEach(h => {
+      const st = { trigger: h, start: "top bottom", end: "top 40%", scrub: true };
+      gsap.fromTo(h.querySelector("[data-l]"), { xPercent: -160 }, { xPercent: 0, ease: "none", scrollTrigger: st });
+      gsap.fromTo(h.querySelector("[data-r]"), { xPercent: 160 }, { xPercent: 0, ease: "none", scrollTrigger: { ...st } });
+    });
+  }
+
+  function initSplitLines() {
+    document.querySelectorAll("[data-split-lines]").forEach(el => {
+      SplitText.create(el, {
+        type: "lines", mask: "lines", autoSplit: true,
+        onSplit: s => gsap.from(s.lines, { yPercent: 110, duration: .8, ease: "power4.out", stagger: .1, scrollTrigger: { trigger: el, start: "top 85%" } })
+      });
+    });
+    // Rolling characters on the projects heading
+    const head = $("rollHead");
+    SplitText.create(head, {
+      type: "chars, lines", mask: "lines", autoSplit: true,
+      onSplit(s) {
+        const d = .6 * parseFloat(getComputedStyle(head).fontSize);
+        gsap.set(s.lines, { perspective: 500 });
+        return gsap.fromTo(s.chars, { rotationX: -110, z: -d, y: d, opacity: 0, transformOrigin: `50% 50% -${d}px` },
+          { rotationX: 0, z: 0, y: 0, opacity: 1, duration: .8, ease: "power4.out", stagger: .025, scrollTrigger: { trigger: head, start: "top 85%" } });
+      }
+    });
+  }
+
+  // Pinned section: scattered letters assemble, then a cobalt stroke wipes into the services
+  function initDraw() {
+    const sec = $("draw");
+    const path = $("drawOverlay").querySelector("path");
+    const head = $("randomHead");
+    const r = Math.min(1.6 * parseFloat(getComputedStyle(head).fontSize), .14 * Math.min(innerWidth, innerHeight));
+    const split = SplitText.create(head, { type: "words, chars", charsClass: "char" });
+    gsap.set(path, { drawSVG: "0% 0%", strokeWidth: "5%" });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: "top top", end: "+=220%", scrub: true, pin: true, anticipatePin: 1,
+      onUpdate: s => { sec.dataset.theme = s.progress > .8 ? "light" : "dark"; } } });
+    tl.fromTo(split.chars, {
+      x: () => gsap.utils.random(-r, r), y: () => gsap.utils.random(-r, r), rotation: () => gsap.utils.random(-90, 90),
+      scale: () => gsap.utils.random(.5, 1.4), filter: "blur(8px)"
+    }, { x: 0, y: 0, rotation: 0, scale: 1, filter: "blur(0px)", ease: "none", stagger: { each: .02, from: "random" }, duration: 1 }, 0)
+      .to(path, { drawSVG: "0% 85%", duration: 1, ease: "none" }, 1.1)
+      .to(path, { strokeWidth: "150%", duration: .75, ease: "none" }, 1.35)
+      .fromTo("#drawEnd", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .3, ease: "none" }, 1.85);
+  }
+
+  // Services stack: each panel collapses as the next opens, pinned on desktop
+  function initServices() {
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 992px)", () => {
+      const list = $("svcList");
+      const svcs = [...list.querySelectorAll(".svc")];
+      const rows = svcs.map(s => s.querySelector(".svc-row"));
+      const vis = svcs.map(s => s.querySelector(".svc-visual"));
+      const imgs = svcs.map(s => s.querySelector(".img img"));
+      const top = document.querySelector(".services .top");
+      const openH = () => innerHeight - top.offsetHeight - rows[0].offsetHeight * 2 - 8;
+      const size = () => { $("svcViewport").style.height = (innerHeight - top.offsetHeight) + "px"; };
+      size();
+      gsap.set(vis, { height: (i) => i === 0 ? openH() : 0 });
+      gsap.set(imgs, { scale: 1.15 });
+      gsap.set(imgs[0], { scale: 1 });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: "#services", start: "top top", end: () => "+=" + innerHeight * svcs.length, scrub: true, pin: true, anticipatePin: 1, invalidateOnRefresh: true, onRefreshInit: size } });
+      tl.to({}, { duration: 1 });
+      svcs.slice(0, -1).forEach((_, k) => {
+        const i = k, at = k + 1;
+        const shift = () => { let s = 0; for (let j = 0; j < i; j++) s += rows[j].offsetHeight; return -s; };
+        tl.to(vis[i], { height: 0, duration: 1, ease: "none" }, at)
+          .fromTo(vis[i + 1], { height: 0 }, { height: openH, duration: 1, ease: "none", immediateRender: false }, at)
+          .to(imgs[i + 1], { scale: 1, duration: 1, ease: "none" }, at)
+          .to(list, { y: shift, duration: 1, ease: "none" }, at);
+      });
+      return () => { $("svcViewport").style.height = ""; };
+    });
+  }
+
+  // Projects: a 3D carousel. Cards slide along a curve, the front card faces you, side cards turn away and fade
+  function initOrbit() {
+    const orbit = $("orbit");
+    const stage = $("stage");
+    const cards = [...$("orbitList").querySelectorAll(".card")];
+    const items = [...document.querySelectorAll("#workContent .item")];
+    const n = cards.length;
+    const wrap = gsap.utils.wrap(0, n);
+    const offset = gsap.utils.wrap(-n / 2, n / 2);
+    const state = { step: 0 };
+    let target = 0, active = 0, shown = -1, stepTween, contentTl;
+    const splits = items.map(it => SplitText.create(it.querySelectorAll(".ln"), { type: "lines", mask: "lines" }));
+    splits.forEach(s => gsap.set(s.lines, { yPercent: 110 }));
+
+    function layout() {
+      const cw = cards[0].offsetWidth;
+      cards.forEach((c, i) => {
+        const d = offset(i - state.step);
+        const ad = Math.abs(d), sd = Math.sign(d);
+        const x = ad <= 1 ? d * cw * .74 : sd * (cw * .74 + (ad - 1) * cw * .42);
+        const scale = ad <= 1 ? 1 - ad * .26 : Math.max(.3, .74 - (ad - 1) * .14);
+        gsap.set(c, {
+          x, z: -ad * 120, rotationY: -sd * Math.min(ad, 1) * 22,
+          scale,
+          opacity: ad < 2.4 ? 1 : Math.max(0, 1 - (ad - 2.4) / .6),
+          filter: `brightness(${1 - Math.min(ad, 2.5) * .12})`,
+          zIndex: 100 - Math.round(ad * 10),
+          pointerEvents: ad < 2.4 ? "auto" : "none"
+        });
+        c.classList.toggle("active", ad < .5);
+        c.tabIndex = ad < .5 ? 0 : -1;
+      });
+    }
+
+    function playVideo() {
+      cards.forEach((c, i) => { const v = c.querySelector("video"); if (v) i === active ? v.play().catch(() => {}) : v.pause(); });
+    }
+
+    function setContent(i) {
+      const cur = $("cur");
+      gsap.killTweensOf(cur);
+      gsap.timeline().to(cur, { yPercent: -100, autoAlpha: 0, duration: .25, ease: "power3.in" })
+        .call(() => { cur.textContent = pad(i + 1); })
+        .set(cur, { yPercent: 100 })
+        .to(cur, { yPercent: 0, autoAlpha: 1, duration: .4, ease: "power3.out" });
+      contentTl?.kill();
+      const prev = shown;
+      shown = i;
+      items.forEach((it, j) => { if (j !== i && j !== prev) { it.classList.remove("on"); gsap.set(splits[j].lines, { yPercent: 110 }); } });
+      contentTl = gsap.timeline();
+      if (prev >= 0 && prev !== i) contentTl.to(splits[prev].lines, { yPercent: -110, duration: .3, stagger: .02, ease: "power3.in" }).call(() => items[prev].classList.remove("on"));
+      contentTl.call(() => items[i].classList.add("on"))
+        .fromTo(splits[i].lines, { yPercent: 110 }, { yPercent: 0, duration: .7, stagger: .06, ease: "power4.out" });
+    }
+
+    function go(dir) {
+      if (!dir) return;
+      target += dir;
+      active = wrap(target);
+      setContent(active);
+      stepTween?.kill();
+      stepTween = gsap.to(state, { step: target, duration: .9, ease: "osmo", onUpdate: layout, onComplete: playVideo });
+    }
+
+    $("prev").onclick = () => go(-1);
+    $("next").onclick = () => go(1);
+
+    // Click a side card to bring it forward; the front card opens on Behance
+    let dragged = false;
+    cards.forEach((c, i) => c.addEventListener("click", e => {
+      const d = Math.round(offset(i - state.step));
+      if (dragged || d !== 0) { e.preventDefault(); if (!dragged) go(d); }
+    }));
+
+    // Swipe or drag to move
+    let x0 = null;
+    stage.addEventListener("pointerdown", e => { x0 = e.clientX; dragged = false; stage.classList.add("dragging"); });
+    addEventListener("pointerup", e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0;
+      x0 = null; stage.classList.remove("dragging");
+      if (Math.abs(dx) > 40) { dragged = true; go(dx < 0 ? 1 : -1); setTimeout(() => { dragged = false; }, 50); }
+    });
+
+    let inView = false;
+    ScrollTrigger.create({ trigger: orbit, start: "top center", end: "bottom center", onToggle: s => { inView = s.isActive; } });
+    addEventListener("keydown", e => {
+      if (!inView || e.target.closest("input, textarea")) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
+    });
+    ScrollTrigger.create({ trigger: orbit, start: "top bottom", end: "bottom top", onToggle: s => { if (s.isActive) playVideo(); } });
+    addEventListener("resize", layout);
+    setContent(0);
+    layout();
+  }
+
+  // Contact: words fly toward you in 3D while the heading sharpens into focus
+  function initContact() {
+    const sec = $("contact");
+    const box = $("words");
+    const content = $("contactContent");
+    gsap.fromTo(content, { autoAlpha: 0, yPercent: 25, scale: .96, filter: "blur(8px)" },
+      { autoAlpha: 1, yPercent: 0, scale: 1, filter: "blur(0px)", ease: "none", scrollTrigger: { trigger: sec, start: "top 60%", end: "top 10%", scrub: true } });
+    const spots = [[-38,-38],[-14,-40],[14,-40],[38,-38],[-42,-14],[-18,-18],[18,-18],[42,-14],[-42,14],[-18,18],[18,18],[42,14],[-38,38],[-14,40],[14,40],[38,38]];
+    const R = gsap.utils.random;
+    const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: "top top", end: "bottom bottom", scrub: 1 } });
+    for (let i = 0; i < 48; i++) {
+      const w = document.createElement("span");
+      w.textContent = contactWords[i % contactWords.length];
+      box.appendChild(w);
+      const [sx, sy] = spots[i % spots.length];
+      const at = R(0, .52) + .12 * Math.floor(i / spots.length);
+      const d1 = R(.12, .18), d2 = R(.12, .18), sc = R(.7, 1.3);
+      const x1 = sx + R(-4, 4), y1 = sy + R(-4, 4);
+      gsap.set(w, { xPercent: -50, yPercent: -50, x: `${sx * R(.08, .22)}vw`, y: `${sy * R(.08, .22)}vh`, z: R(-1600, -1100), scale: .35 * sc, autoAlpha: 0, filter: "blur(10px)" });
+      tl.to(w, { x: `${x1}vw`, y: `${y1}vh`, z: 0, scale: sc, autoAlpha: R(.25, .62), filter: "blur(0px)", duration: d1, ease: "power1.inOut" }, at)
+        .to(w, { x: `${x1 + R(-3, 3)}vw`, y: `${y1 + R(-3, 3)}vh`, z: R(800, 1200), scale: sc * R(1.3, 1.65), autoAlpha: 0, filter: "blur(8px)", duration: d2, ease: "power1.in" }, at + d1);
+    }
+  }
+
+  function initFooter() {
+    gsap.matchMedia().add("(min-width: 768px)", () => {
+      gsap.from("#footerInner", { yPercent: -60, ease: "none", scrollTrigger: { trigger: "#footer", start: "top bottom", end: "bottom bottom", scrub: true } });
+    });
+  }
+}
+</script>
+</body>
+</html>
