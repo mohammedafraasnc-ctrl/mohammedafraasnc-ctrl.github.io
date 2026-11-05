@@ -164,6 +164,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .work-content h3 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 110; font-size: clamp(18px, 1.7vw, 24px); text-transform: uppercase; line-height: 1.05; }
 .work-content p { margin: 0; color: var(--ink-2); font-size: 14px; }
 .work-content a { color: var(--cobalt); white-space: nowrap; }
+.watch { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; color: var(--cobalt); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; white-space: nowrap; }
+.card .badge { position: absolute; left: 14px; bottom: 14px; background: var(--paper); color: var(--ink); border-radius: 999px; padding: 6px 12px; opacity: 0; transition: opacity .3s; }
+.card.active .badge, html:not(.js) .card .badge { opacity: 1; }
+.player { border: 0; padding: 0; background: transparent; width: min(1100px, 92vw); max-width: none; overflow: visible; }
+.player::backdrop { background: rgba(13, 14, 20, .9); }
+.player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; }
+.player .close { position: absolute; right: 0; bottom: calc(100% + 10px); background: var(--cobalt-ink); color: var(--ink); border: 0; border-radius: 999px; height: 34px; padding: 0 14px; cursor: pointer; }
 .arrows { display: flex; gap: 10px; flex: none; }
 .arrow { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; cursor: pointer; font-size: 18px; color: var(--ink); transition: background .25s, color .25s; }
 .arrow:hover { background: var(--ink); color: var(--paper); }
@@ -326,7 +333,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
           <div class="svc-row"><span class="n">[04]</span><h3>Video + videography</h3></div>
           <div class="svc-visual">
             <div class="desc"><p>Shooting and editing property showcases, promos, reels, shorts and long-form videos, with pacing, music and sound design that keep people watching.</p><div class="tags mono"><span>Shoots</span><span>Reels + shorts</span><span>Sound design</span></div></div>
-            <div class="img"><img src="assets/work/01.webp?v=2" alt="Videography and video editing project cover" loading="lazy"></div>
+            <div class="img"><img src="assets/film/bfg-advisory.webp" alt="Still from the BFG Advisory brand film" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -405,6 +412,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   </div>
 </footer>
 
+<dialog class="player" id="player" aria-label="BFG Advisory brand film">
+  <button class="close mono" id="playerClose" type="button" aria-label="Close the film">Close ✕</button>
+  <video id="playerVideo" controls playsinline preload="none" poster="assets/film/bfg-advisory.webp"></video>
+</dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
@@ -412,8 +424,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-// Add `video: "assets/work/xx.mp4"` to any project to play a looping clip on its card.
+// `video` plays a short muted loop on the card; `film` opens the full video in the on-page player.
 const projects = [
+  { t: "BFG Advisory brand film", k: "Videography + editing", cover: "assets/film/bfg-advisory.webp", video: "assets/film/bfg-advisory-loop.mp4", film: "assets/film/bfg-advisory.mp4" },
   { t: "Videography + video editing", k: "Video", img: "01", url: "https://www.behance.net/gallery/255803449/VIDEOGRAPHVIDEOEDITING" },
   { t: "SEO motion graphics", k: "Motion graphics", img: "02", url: "https://www.behance.net/gallery/248926191/SEO-Motion-graphics" },
   { t: "Website showreel", k: "Motion graphics", img: "03", url: "https://www.behance.net/gallery/248790111/Motion-graphics-web-site-show-reel" },
@@ -437,12 +450,35 @@ document.documentElement.classList.toggle("js", hasGsap && !reduced);
 
 // Build project cards and captions (works with or without GSAP)
 $("tot").textContent = pad(projects.length);
-$("orbitList").innerHTML = projects.map(p =>
-  `<a class="card" href="${p.url}" target="_blank" rel="noopener" aria-label="${p.t} on Behance">${p.video ? `<video src="${p.video}" muted loop playsinline poster="assets/work/${p.img}.webp?v=2"></video>` : `<img src="assets/work/${p.img}.webp?v=2" alt="" loading="lazy">`}</a>`
+const coverOf = p => p.cover || `assets/work/${p.img}.webp?v=2`;
+$("orbitList").innerHTML = projects.map((p, i) => p.film
+  ? `<a class="card" href="${p.film}" data-film="${i}" aria-label="Watch ${p.t}"><video src="${p.video}" muted loop playsinline autoplay preload="auto" poster="${coverOf(p)}"></video><span class="badge mono">▶ Play film</span></a>`
+  : `<a class="card" href="${p.url}" target="_blank" rel="noopener" aria-label="${p.t} on Behance"><img src="${coverOf(p)}" alt="" loading="lazy"></a>`
 ).join("");
-$("workContent").innerHTML = projects.map(p =>
-  `<div class="item"><h3 class="ln">${p.t}</h3><p class="ln">${p.k}</p><p class="ln"><a href="${p.url}" target="_blank" rel="noopener">View on Behance ↗</a></p></div>`
+$("workContent").innerHTML = projects.map((p, i) =>
+  `<div class="item"><h3 class="ln">${p.t}</h3><p class="ln">${p.k}</p><p class="ln">${p.film
+    ? `<button class="watch" type="button" data-film="${i}">Watch the film ▶</button>`
+    : `<a href="${p.url}" target="_blank" rel="noopener">View on Behance ↗</a>`}</p></div>`
 ).join("");
+
+// Film player: full video with sound in a dialog
+const player = $("player"), playerVideo = $("playerVideo");
+function openFilm(i) {
+  playerVideo.src = projects[i].film;
+  player.showModal();
+  playerVideo.play().catch(() => {});
+  window.__lenis?.stop();
+}
+player.addEventListener("close", () => { playerVideo.pause(); window.__lenis?.start(); });
+$("playerClose").onclick = () => player.close();
+player.addEventListener("click", e => { if (e.target === player) player.close(); });
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-film]");
+  if (!el || e.defaultPrevented) return;
+  if (el.classList.contains("card") && document.documentElement.classList.contains("js") && !el.classList.contains("active")) return;
+  e.preventDefault();
+  openFilm(+el.dataset.film);
+});
 
 $("copy").onclick = async () => {
   const text = $("mail").textContent;
@@ -484,6 +520,7 @@ if (!hasGsap || reduced) {
   history.scrollRestoration = "manual";
 
   const lenis = new Lenis({ lerp: .165, wheelMultiplier: 1.25 });
+  window.__lenis = lenis;
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add(t => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
