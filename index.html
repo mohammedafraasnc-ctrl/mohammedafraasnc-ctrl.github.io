@@ -170,6 +170,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .player { border: 0; padding: 0; background: transparent; width: min(1100px, 92vw); max-width: none; overflow: visible; }
 .player::backdrop { background: rgba(13, 14, 20, .9); }
 .player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; }
+.player.vertical { width: fit-content; }
+.player.vertical video { width: auto; height: min(84vh, 150vw); max-width: 92vw; aspect-ratio: 9 / 16; object-fit: contain; }
 .player .close { position: absolute; right: 0; bottom: calc(100% + 10px); background: var(--cobalt-ink); color: var(--ink); border: 0; border-radius: 999px; height: 34px; padding: 0 14px; cursor: pointer; }
 .arrows { display: flex; gap: 10px; flex: none; }
 .arrow { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; cursor: pointer; font-size: 18px; color: var(--ink); transition: background .25s, color .25s; }
@@ -427,6 +429,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 // `video` plays a short muted loop on the card; `film` opens the full video in the on-page player.
 const projects = [
   { t: "BFG Advisory brand film", k: "Videography + editing", cover: "assets/film/bfg-advisory.webp", video: "assets/film/bfg-advisory-loop.mp4", film: "assets/film/bfg-advisory.mp4" },
+  { t: "BFG Global Mobility visa reel", k: "Short-form storytelling", cover: "assets/film/bfg-visa-reel.webp", video: "assets/film/bfg-visa-reel-loop.mp4", film: "assets/film/bfg-visa-reel.mp4", vertical: true },
+  { t: "BFG Advisory accounting reel", k: "Videography + motion graphics", cover: "assets/film/bfg-accounting-reel.webp", video: "assets/film/bfg-accounting-reel-loop.mp4", film: "assets/film/bfg-accounting-reel.mp4", vertical: true },
+  { t: "UAE e-invoicing explainer", k: "Explainer + motion graphics", cover: "assets/film/bfg-e-invoicing.webp", video: "assets/film/bfg-e-invoicing-loop.mp4", film: "assets/film/bfg-e-invoicing.mp4", vertical: true },
   { t: "Videography + video editing", k: "Video", img: "01", url: "https://www.behance.net/gallery/255803449/VIDEOGRAPHVIDEOEDITING" },
   { t: "SEO motion graphics", k: "Motion graphics", img: "02", url: "https://www.behance.net/gallery/248926191/SEO-Motion-graphics" },
   { t: "Website showreel", k: "Motion graphics", img: "03", url: "https://www.behance.net/gallery/248790111/Motion-graphics-web-site-show-reel" },
@@ -464,7 +469,11 @@ $("workContent").innerHTML = projects.map((p, i) =>
 // Film player: full video with sound in a dialog
 const player = $("player"), playerVideo = $("playerVideo");
 function openFilm(i) {
-  playerVideo.src = projects[i].film;
+  const p = projects[i];
+  player.classList.toggle("vertical", !!p.vertical);
+  player.setAttribute("aria-label", p.t);
+  playerVideo.poster = p.vertical ? "" : p.cover;
+  playerVideo.src = p.film;
   player.showModal();
   playerVideo.play().catch(() => {});
   window.__lenis?.stop();
